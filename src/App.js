@@ -1,5 +1,5 @@
 import './App.css';
-import React,{useState} from  'react' 
+import React,{useState,useEffect} from  'react' 
 
 
 
@@ -7,6 +7,23 @@ import React,{useState} from  'react'
 function App() {
  
   const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+   
+    fetch("http://127.0.0.1:8000/api/movies/", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token'
+                      
+
+      }
+
+    })
+   
+
+
+  }, [])
 
 
 
