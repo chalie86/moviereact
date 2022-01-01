@@ -1,5 +1,6 @@
 import './App.css';
 import React,{useState,useEffect} from  'react' 
+import MovieList from './component/movie-list';
 
 
 
@@ -14,18 +15,19 @@ function App() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Token'
+        'Authorization': 'Token 902a4b6d4a107f67b44425ede81b0b1d8ababc06'
                       
 
       }
 
-    })
-   
-
-
+    }).then(resp => resp.json())
+      .then(resp => setMovies(resp))
+      .catch(error => console.log(error))
   }, [])
 
-
+ const movieClicked = movie => {
+    console.log(movie.title)
+ }
 
 
   return (
@@ -34,15 +36,7 @@ function App() {
         <h1>Movie rater</h1>
       </header>
       <div className="layout">
-      <div>Movie List</div>
-      <div>
-        {
-          movies.map(movie => {
-            return <h2>{movie}</h2>
-          })
-        }
-
-      </div>
+        <MovieList movies = {movies} movieClicked={movieClicked}></MovieList>
       <div>Movie details</div>
       </div>
     </div>
